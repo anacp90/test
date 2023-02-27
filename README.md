@@ -10,4 +10,11 @@ How to Run the test Application
 6. Create a Github Jenkins file to build and push the container image to the docker hub. We have to provide the Docker hub credentials to the jenkins file. I have creted a pipeline as code where the Jenkins file will be picked up for the continuous deployment.
 7. We can create a github hook to automatically trigger the jenkins pipeline whenever there is a change in the github code files.
 8. The jenkins should be downloaded with  the required plugins for the building of the code.
-9. 
+9. Create an AWS account and login to the AWS with the credentials 
+10. Create the AWS ECS cluster using the cloudformation stack provided "ECS.yaml" by running the command below from aws cli
+                    aws cloudformation create-stack \
+                          --stack-name ecs-stack \
+                          --template-body file://ECS.yaml
+11. Install the softwares AWS cli, Docker in the Jenkins server(agent) before running the above commands.
+12. Once the updated docker image is pushed we can either run manually the the cloudformation stack for ECS or we can run from Jenkins pipeline by providing AWS credentials in the Jenkins.
+We should also add Docker registry credentials, Github credentials and AWS credentials in the Jenkins global domain.
